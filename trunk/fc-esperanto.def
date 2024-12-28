@@ -1,0 +1,570 @@
+% \subsubsection{fc-english.def}
+% English definitions
+%    \begin{macrocode}
+\ProvidesFCLanguage{english}[2016/01/12]%
+%    \end{macrocode}
+% Define macro that converts a number or count register (first 
+% argument) to an ordinal, and stores the result in the 
+% second argument, which should be a control sequence.
+%    \begin{macrocode}
+\newcommand*\@ordinalMenglish[2]{%
+\def\@fc@ord{}%
+\@orgargctr=#1\relax
+\@ordinalctr=#1%
+\@FCmodulo{\@ordinalctr}{100}%
+\ifnum\@ordinalctr=11\relax
+  \def\@fc@ord{th}%
+\else
+  \ifnum\@ordinalctr=12\relax
+    \def\@fc@ord{th}%
+  \else
+    \ifnum\@ordinalctr=13\relax
+      \def\@fc@ord{th}%
+    \else
+      \@FCmodulo{\@ordinalctr}{10}%
+      \ifcase\@ordinalctr
+        \def\@fc@ord{th}%      case 0
+        \or \def\@fc@ord{st}%  case 1
+        \or \def\@fc@ord{nd}%  case 2
+        \or \def\@fc@ord{rd}%  case 3
+      \else
+        \def\@fc@ord{th}%      default case
+      \fi
+    \fi
+  \fi
+\fi
+\edef#2{\number#1\relax\noexpand\fmtord{\@fc@ord}}%
+}%
+\global\let\@ordinalMenglish\@ordinalMenglish
+%    \end{macrocode}
+% There is no gender difference in English, so make feminine and
+% neuter the same as the masculine.
+%    \begin{macrocode}
+\global\let\@ordinalFenglish=\@ordinalMenglish
+\global\let\@ordinalNenglish=\@ordinalMenglish
+%    \end{macrocode}
+% Define the macro that prints the value of a \TeX\ count register
+% as text. To make it easier, break it up into units, teens and
+% tens. First, the units: the argument should be between 0 and 9
+% inclusive.
+%    \begin{macrocode}
+\newcommand*\@@unitstringenglish[1]{%
+  \ifcase#1\relax
+    zero%
+    \or one%
+    \or two%
+    \or three%
+    \or four%
+    \or five%
+    \or six%
+    \or seven%
+    \or eight%
+    \or nine%
+\fi
+}%
+\global\let\@@unitstringenglish\@@unitstringenglish
+%    \end{macrocode}
+% Next the tens, again the argument should be between 0 and 9
+% inclusive.
+%    \begin{macrocode}
+\newcommand*\@@tenstringenglish[1]{%
+  \ifcase#1\relax
+    \or ten%
+    \or twenty%
+    \or thirty%
+    \or forty%
+    \or fifty%
+    \or sixty%
+    \or seventy%
+    \or eighty%
+    \or ninety%
+  \fi
+}%
+\global\let\@@tenstringenglish\@@tenstringenglish
+%    \end{macrocode}
+% Finally the teens, again the argument should be between 0 and 9
+% inclusive.
+%    \begin{macrocode}
+\newcommand*\@@teenstringenglish[1]{%
+  \ifcase#1\relax
+    ten%
+    \or eleven%
+    \or twelve%
+    \or thirteen%
+    \or fourteen%
+    \or fifteen%
+    \or sixteen%
+    \or seventeen%
+    \or eighteen%
+    \or nineteen%
+  \fi
+}%
+\global\let\@@teenstringenglish\@@teenstringenglish
+%    \end{macrocode}
+% As above, but with the initial letter in uppercase. The units:
+%    \begin{macrocode}
+\newcommand*\@@Unitstringenglish[1]{%
+  \ifcase#1\relax
+    Zero%
+    \or One%
+    \or Two%
+    \or Three%
+    \or Four%
+    \or Five%
+    \or Six%
+    \or Seven%
+    \or Eight%
+    \or Nine%
+  \fi
+}%
+\global\let\@@Unitstringenglish\@@Unitstringenglish
+%    \end{macrocode}
+% The tens:
+%    \begin{macrocode}
+\newcommand*\@@Tenstringenglish[1]{%
+  \ifcase#1\relax
+    \or Ten%
+    \or Twenty%
+    \or Thirty%
+    \or Forty%
+    \or Fifty%
+    \or Sixty%
+    \or Seventy%
+    \or Eighty%
+    \or Ninety%
+  \fi
+}%
+\global\let\@@Tenstringenglish\@@Tenstringenglish
+%    \end{macrocode}
+% The teens:
+%    \begin{macrocode}
+\newcommand*\@@Teenstringenglish[1]{%
+  \ifcase#1\relax
+    Ten%
+    \or Eleven%
+    \or Twelve%
+    \or Thirteen%
+    \or Fourteen%
+    \or Fifteen%
+    \or Sixteen%
+    \or Seventeen%
+    \or Eighteen%
+    \or Nineteen%
+  \fi
+}%
+\global\let\@@Teenstringenglish\@@Teenstringenglish
+%    \end{macrocode}
+% This has changed in version 1.09, so that it now stores
+% the result in the second argument, but doesn't display anything.
+% Since it only affects internal macros, it shouldn't affect
+% documents created with older versions. (These internal macros are
+% not meant for use in documents.)
+%    \begin{macrocode}
+\newcommand*\@@numberstringenglish[2]{%
+\ifnum#1>99999
+\PackageError{fmtcount}{Out of range}%
+{This macro only works for values less than 100000}%
+\else
+\ifnum#1<0
+\PackageError{fmtcount}{Negative numbers not permitted}%
+{This macro does not work for negative numbers, however
+you can try typing "minus" first, and then pass the modulus of
+this number}%
+\fi
+\fi
+\def#2{}%
+\@strctr=#1\relax \divide\@strctr by 1000\relax
+\ifnum\@strctr>9
+  \divide\@strctr by 10
+  \ifnum\@strctr>1\relax
+    \let\@@fc@numstr#2\relax
+    \edef#2{\@@fc@numstr\@tenstring{\@strctr}}%
+    \@strctr=#1 \divide\@strctr by 1000\relax
+    \@FCmodulo{\@strctr}{10}%
+    \ifnum\@strctr>0\relax
+      \let\@@fc@numstr#2\relax
+      \edef#2{\@@fc@numstr-\@unitstring{\@strctr}}%
+    \fi
+  \else
+    \@strctr=#1\relax
+    \divide\@strctr by 1000\relax
+    \@FCmodulo{\@strctr}{10}%
+    \let\@@fc@numstr#2\relax
+    \edef#2{\@@fc@numstr\@teenstring{\@strctr}}%
+  \fi
+  \let\@@fc@numstr#2\relax
+  \edef#2{\@@fc@numstr\ \@thousand}%
+\else
+  \ifnum\@strctr>0\relax
+    \let\@@fc@numstr#2\relax
+    \edef#2{\@@fc@numstr\@unitstring{\@strctr}\ \@thousand}%
+  \fi
+\fi
+\@strctr=#1\relax \@FCmodulo{\@strctr}{1000}%
+\divide\@strctr by 100
+\ifnum\@strctr>0\relax
+   \ifnum#1>1000\relax
+      \let\@@fc@numstr#2\relax
+      \edef#2{\@@fc@numstr\ }%
+   \fi
+   \let\@@fc@numstr#2\relax
+   \edef#2{\@@fc@numstr\@unitstring{\@strctr}\ \@hundred}%
+\fi
+\@strctr=#1\relax \@FCmodulo{\@strctr}{100}%
+\ifnum#1>100\relax
+  \ifnum\@strctr>0\relax
+    \let\@@fc@numstr#2\relax
+    \edef#2{\@@fc@numstr\ \@andname\ }%
+  \fi
+\fi
+\ifnum\@strctr>19\relax
+  \divide\@strctr by 10\relax
+  \let\@@fc@numstr#2\relax
+  \edef#2{\@@fc@numstr\@tenstring{\@strctr}}%
+  \@strctr=#1\relax \@FCmodulo{\@strctr}{10}%
+  \ifnum\@strctr>0\relax
+    \let\@@fc@numstr#2\relax
+    \edef#2{\@@fc@numstr-\@unitstring{\@strctr}}%
+  \fi
+\else
+  \ifnum\@strctr<10\relax
+    \ifnum\@strctr=0\relax
+       \ifnum#1<100\relax
+          \let\@@fc@numstr#2\relax
+          \edef#2{\@@fc@numstr\@unitstring{\@strctr}}%
+       \fi
+    \else
+      \let\@@fc@numstr#2\relax
+      \edef#2{\@@fc@numstr\@unitstring{\@strctr}}%
+    \fi
+  \else
+    \@FCmodulo{\@strctr}{10}%
+    \let\@@fc@numstr#2\relax
+    \edef#2{\@@fc@numstr\@teenstring{\@strctr}}%
+  \fi
+\fi
+}%
+\global\let\@@numberstringenglish\@@numberstringenglish
+%    \end{macrocode}
+% All lower case version, the second argument must be a control
+% sequence.%
+% \changes{3.02}{2016/01/12}{Replace \cs{DeclareRobustCommand} by
+% \cs{newcommand*} as robustness is handled now at top level in
+% \texttt{fmtcount.sty}, and we don't need \cs{long} macros. Concerned
+% macros are \cs{@numberstringMenglish}, \cs{@ordinalstringMenglish},
+% and \cs{@OrdinalstringMenglish}}
+%    \begin{macrocode}
+\newcommand*{\@numberstringMenglish}[2]{%
+  \let\@unitstring=\@@unitstringenglish
+  \let\@teenstring=\@@teenstringenglish
+  \let\@tenstring=\@@tenstringenglish
+  \def\@hundred{hundred}\def\@thousand{thousand}%
+  \def\@andname{and}%
+  \@@numberstringenglish{#1}{#2}%
+}%
+\global\let\@numberstringMenglish\@numberstringMenglish
+%    \end{macrocode}
+% There is no gender in English, so make feminine and neuter the
+% same
+% as the masculine.
+%    \begin{macrocode}
+\global\let\@numberstringFenglish=\@numberstringMenglish
+\global\let\@numberstringNenglish=\@numberstringMenglish
+%    \end{macrocode}
+% This version makes the first letter of each word an uppercase
+% character (except ``and''). The second argument must be a control 
+% sequence.
+%    \begin{macrocode}
+\newcommand*\@NumberstringMenglish[2]{%
+  \let\@unitstring=\@@Unitstringenglish
+  \let\@teenstring=\@@Teenstringenglish
+  \let\@tenstring=\@@Tenstringenglish
+  \def\@hundred{Hundred}\def\@thousand{Thousand}%
+  \def\@andname{and}%
+  \@@numberstringenglish{#1}{#2}%
+}%
+\global\let\@NumberstringMenglish\@NumberstringMenglish
+%    \end{macrocode}
+% There is no gender in English, so make feminine and neuter the
+% same
+% as the masculine.
+%    \begin{macrocode}
+\global\let\@NumberstringFenglish=\@NumberstringMenglish
+\global\let\@NumberstringNenglish=\@NumberstringMenglish
+%    \end{macrocode}
+% Define a macro that produces an ordinal as a string. Again, break
+% it up into units, teens and tens. First the units:
+%    \begin{macrocode}
+\newcommand*\@@unitthstringenglish[1]{%
+  \ifcase#1\relax
+    zeroth%
+    \or first%
+    \or second%
+    \or third%
+    \or fourth%
+    \or fifth%
+    \or sixth%
+    \or seventh%
+    \or eighth%
+    \or ninth%
+  \fi
+}%
+\global\let\@@unitthstringenglish\@@unitthstringenglish
+%    \end{macrocode}
+% Next the tens:
+%    \begin{macrocode}
+\newcommand*\@@tenthstringenglish[1]{%
+  \ifcase#1\relax
+    \or tenth%
+    \or twentieth%
+    \or thirtieth%
+    \or fortieth%
+    \or fiftieth%
+    \or sixtieth%
+    \or seventieth%
+    \or eightieth%
+    \or ninetieth%
+  \fi
+}%
+\global\let\@@tenthstringenglish\@@tenthstringenglish
+%    \end{macrocode}
+% The teens:
+%    \begin{macrocode}
+\newcommand*\@@teenthstringenglish[1]{%
+  \ifcase#1\relax
+    tenth%
+    \or eleventh%
+    \or twelfth%
+    \or thirteenth%
+    \or fourteenth%
+    \or fifteenth%
+    \or sixteenth%
+    \or seventeenth%
+    \or eighteenth%
+    \or nineteenth%
+  \fi
+}%
+\global\let\@@teenthstringenglish\@@teenthstringenglish
+%    \end{macrocode}
+% As before, but with the first letter in upper case. The units:
+%    \begin{macrocode}
+\newcommand*\@@Unitthstringenglish[1]{%
+  \ifcase#1\relax
+    Zeroth%
+    \or First%
+    \or Second%
+    \or Third%
+    \or Fourth%
+    \or Fifth%
+    \or Sixth%
+    \or Seventh%
+    \or Eighth%
+    \or Ninth%
+  \fi
+}%
+\global\let\@@Unitthstringenglish\@@Unitthstringenglish
+%    \end{macrocode}
+% The tens:
+%    \begin{macrocode}
+\newcommand*\@@Tenthstringenglish[1]{%
+  \ifcase#1\relax
+    \or Tenth%
+    \or Twentieth%
+    \or Thirtieth%
+    \or Fortieth%
+    \or Fiftieth%
+    \or Sixtieth%
+    \or Seventieth%
+    \or Eightieth%
+    \or Ninetieth%
+  \fi
+}%
+\global\let\@@Tenthstringenglish\@@Tenthstringenglish
+%    \end{macrocode}
+% The teens:
+%    \begin{macrocode}
+\newcommand*\@@Teenthstringenglish[1]{%
+  \ifcase#1\relax
+    Tenth%
+    \or Eleventh%
+    \or Twelfth%
+    \or Thirteenth%
+    \or Fourteenth%
+    \or Fifteenth%
+    \or Sixteenth%
+    \or Seventeenth%
+    \or Eighteenth%
+    \or Nineteenth%
+  \fi
+}%
+\global\let\@@Teenthstringenglish\@@Teenthstringenglish
+%    \end{macrocode}
+% Again, as from version 1.09, this has been changed to take two
+% arguments, where the second argument is a control sequence.
+% The resulting text is stored in the control sequence, and nothing
+% is displayed.
+%    \begin{macrocode}
+\newcommand*\@@ordinalstringenglish[2]{%
+\@strctr=#1\relax
+\ifnum#1>99999
+\PackageError{fmtcount}{Out of range}%
+{This macro only works for values less than 100000 (value given: \number\@strctr)}%
+\else
+\ifnum#1<0
+\PackageError{fmtcount}{Negative numbers not permitted}%
+{This macro does not work for negative numbers, however
+you can try typing "minus" first, and then pass the modulus of
+this number}%
+\fi
+\def#2{}%
+\fi
+\@strctr=#1\relax \divide\@strctr by 1000\relax
+\ifnum\@strctr>9\relax
+%    \end{macrocode}
+% \#1 is greater or equal to 10000
+%    \begin{macrocode}
+  \divide\@strctr by 10
+  \ifnum\@strctr>1\relax
+    \let\@@fc@ordstr#2\relax
+    \edef#2{\@@fc@ordstr\@tenstring{\@strctr}}%
+    \@strctr=#1\relax
+    \divide\@strctr by 1000\relax
+    \@FCmodulo{\@strctr}{10}%
+    \ifnum\@strctr>0\relax
+      \let\@@fc@ordstr#2\relax
+      \edef#2{\@@fc@ordstr-\@unitstring{\@strctr}}%
+    \fi
+  \else
+    \@strctr=#1\relax \divide\@strctr by 1000\relax
+    \@FCmodulo{\@strctr}{10}%
+    \let\@@fc@ordstr#2\relax
+    \edef#2{\@@fc@ordstr\@teenstring{\@strctr}}%
+  \fi
+  \@strctr=#1\relax \@FCmodulo{\@strctr}{1000}%
+  \ifnum\@strctr=0\relax
+    \let\@@fc@ordstr#2\relax
+    \edef#2{\@@fc@ordstr\ \@thousandth}%
+  \else
+    \let\@@fc@ordstr#2\relax
+    \edef#2{\@@fc@ordstr\ \@thousand}%
+  \fi
+\else
+  \ifnum\@strctr>0\relax
+    \let\@@fc@ordstr#2\relax
+    \edef#2{\@@fc@ordstr\@unitstring{\@strctr}}%
+    \@strctr=#1\relax \@FCmodulo{\@strctr}{1000}%
+    \let\@@fc@ordstr#2\relax
+    \ifnum\@strctr=0\relax
+      \edef#2{\@@fc@ordstr\ \@thousandth}%
+    \else
+      \edef#2{\@@fc@ordstr\ \@thousand}%
+    \fi
+  \fi
+\fi
+\@strctr=#1\relax \@FCmodulo{\@strctr}{1000}%
+\divide\@strctr by 100
+\ifnum\@strctr>0\relax
+  \ifnum#1>1000\relax
+    \let\@@fc@ordstr#2\relax
+    \edef#2{\@@fc@ordstr\ }%
+  \fi
+  \let\@@fc@ordstr#2\relax
+  \edef#2{\@@fc@ordstr\@unitstring{\@strctr}}%
+  \@strctr=#1\relax \@FCmodulo{\@strctr}{100}%
+  \let\@@fc@ordstr#2\relax
+  \ifnum\@strctr=0\relax
+    \edef#2{\@@fc@ordstr\ \@hundredth}%
+  \else
+    \edef#2{\@@fc@ordstr\ \@hundred}%
+  \fi
+\fi
+\@strctr=#1\relax \@FCmodulo{\@strctr}{100}%
+\ifnum#1>100\relax
+  \ifnum\@strctr>0\relax
+    \let\@@fc@ordstr#2\relax
+    \edef#2{\@@fc@ordstr\ \@andname\ }%
+  \fi
+\fi
+\ifnum\@strctr>19\relax
+  \@tmpstrctr=\@strctr
+  \divide\@strctr by 10\relax
+  \@FCmodulo{\@tmpstrctr}{10}%
+  \let\@@fc@ordstr#2\relax
+  \ifnum\@tmpstrctr=0\relax
+    \edef#2{\@@fc@ordstr\@tenthstring{\@strctr}}%
+  \else
+    \edef#2{\@@fc@ordstr\@tenstring{\@strctr}}%
+  \fi
+  \@strctr=#1\relax \@FCmodulo{\@strctr}{10}%
+  \ifnum\@strctr>0\relax
+    \let\@@fc@ordstr#2\relax
+    \edef#2{\@@fc@ordstr-\@unitthstring{\@strctr}}%
+  \fi
+\else
+  \ifnum\@strctr<10\relax
+    \ifnum\@strctr=0\relax
+      \ifnum#1<100\relax
+        \let\@@fc@ordstr#2\relax
+        \edef#2{\@@fc@ordstr\@unitthstring{\@strctr}}%
+      \fi
+    \else
+      \let\@@fc@ordstr#2\relax
+      \edef#2{\@@fc@ordstr\@unitthstring{\@strctr}}%
+    \fi
+  \else
+    \@FCmodulo{\@strctr}{10}%
+    \let\@@fc@ordstr#2\relax
+    \edef#2{\@@fc@ordstr\@teenthstring{\@strctr}}%
+  \fi
+\fi
+}%
+\global\let\@@ordinalstringenglish\@@ordinalstringenglish
+%    \end{macrocode}
+% All lower case version. Again, the second argument must be a
+% control sequence in which the resulting text is stored.
+%    \begin{macrocode}
+\newcommand*{\@ordinalstringMenglish}[2]{%
+  \let\@unitthstring=\@@unitthstringenglish
+  \let\@teenthstring=\@@teenthstringenglish
+  \let\@tenthstring=\@@tenthstringenglish
+  \let\@unitstring=\@@unitstringenglish
+  \let\@teenstring=\@@teenstringenglish
+  \let\@tenstring=\@@tenstringenglish
+  \def\@andname{and}%
+  \def\@hundred{hundred}\def\@thousand{thousand}%
+  \def\@hundredth{hundredth}\def\@thousandth{thousandth}%
+  \@@ordinalstringenglish{#1}{#2}%
+}%
+\global\let\@ordinalstringMenglish\@ordinalstringMenglish
+%    \end{macrocode}
+% No gender in English, so make feminine and neuter same as
+% masculine:
+%    \begin{macrocode}
+\global\let\@ordinalstringFenglish=\@ordinalstringMenglish
+\global\let\@ordinalstringNenglish=\@ordinalstringMenglish
+%    \end{macrocode}
+% First letter of each word in upper case:
+%    \begin{macrocode}
+\newcommand*{\@OrdinalstringMenglish}[2]{%
+  \let\@unitthstring=\@@Unitthstringenglish
+  \let\@teenthstring=\@@Teenthstringenglish
+  \let\@tenthstring=\@@Tenthstringenglish
+  \let\@unitstring=\@@Unitstringenglish
+  \let\@teenstring=\@@Teenstringenglish
+  \let\@tenstring=\@@Tenstringenglish
+  \def\@andname{and}%
+  \def\@hundred{Hundred}\def\@thousand{Thousand}%
+  \def\@hundredth{Hundredth}\def\@thousandth{Thousandth}%
+  \@@ordinalstringenglish{#1}{#2}%
+}%
+\global\let\@OrdinalstringMenglish\@OrdinalstringMenglish
+%    \end{macrocode}
+% No gender in English, so make feminine and neuter same as
+% masculine:
+%    \begin{macrocode}
+\global\let\@OrdinalstringFenglish=\@OrdinalstringMenglish
+\global\let\@OrdinalstringNenglish=\@OrdinalstringMenglish
+%    \end{macrocode}
+\iffalse Local variables: \fi
+\iffalse mode: docTeX     \fi
+\iffalse End:             \fi
