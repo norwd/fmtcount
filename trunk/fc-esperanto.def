@@ -1,158 +1,158 @@
-% \subsubsection{fc-english.def}
-% English definitions
+% \subsubsection{fc-esperanto.def}
+% Esperanto definitions
 %    \begin{macrocode}
-\ProvidesFCLanguage{english}[2016/01/12]%
+\ProvidesFCLanguage{esperanto}[2024/12/28]%
 %    \end{macrocode}
 % Define macro that converts a number or count register (first 
 % argument) to an ordinal, and stores the result in the 
 % second argument, which should be a control sequence.
 %    \begin{macrocode}
-\newcommand*\@ordinalMenglish[2]{%
+\newcommand*\@ordinalMesperanto[2]{%
 \def\@fc@ord{}%
 \@orgargctr=#1\relax
 \@ordinalctr=#1%
 \@FCmodulo{\@ordinalctr}{100}%
 \ifnum\@ordinalctr=11\relax
-  \def\@fc@ord{th}%
+  \def\@fc@ord{a}%
 \else
   \ifnum\@ordinalctr=12\relax
-    \def\@fc@ord{th}%
+    \def\@fc@ord{a}%
   \else
     \ifnum\@ordinalctr=13\relax
-      \def\@fc@ord{th}%
+      \def\@fc@ord{a}%
     \else
       \@FCmodulo{\@ordinalctr}{10}%
       \ifcase\@ordinalctr
-        \def\@fc@ord{th}%      case 0
-        \or \def\@fc@ord{st}%  case 1
-        \or \def\@fc@ord{nd}%  case 2
-        \or \def\@fc@ord{rd}%  case 3
+        \def\@fc@ord{a}%      case 0
+        \or \def\@fc@ord{a}%  case 1
+        \or \def\@fc@ord{a}%  case 2
+        \or \def\@fc@ord{a}%  case 3
       \else
-        \def\@fc@ord{th}%      default case
+        \def\@fc@ord{a}%      default case
       \fi
     \fi
   \fi
 \fi
 \edef#2{\number#1\relax\noexpand\fmtord{\@fc@ord}}%
 }%
-\global\let\@ordinalMenglish\@ordinalMenglish
+\global\let\@ordinalMesperanto\@ordinalMesperanto
 %    \end{macrocode}
-% There is no gender difference in English, so make feminine and
+% There is no gender difference in Esperanto, so make feminine and
 % neuter the same as the masculine.
 %    \begin{macrocode}
-\global\let\@ordinalFenglish=\@ordinalMenglish
-\global\let\@ordinalNenglish=\@ordinalMenglish
+\global\let\@ordinalFesperanto=\@ordinalMesperanto
+\global\let\@ordinalNesperanto=\@ordinalMesperanto
 %    \end{macrocode}
 % Define the macro that prints the value of a \TeX\ count register
 % as text. To make it easier, break it up into units, teens and
 % tens. First, the units: the argument should be between 0 and 9
 % inclusive.
 %    \begin{macrocode}
-\newcommand*\@@unitstringenglish[1]{%
+\newcommand*\@@unitstringesperanto[1]{%
   \ifcase#1\relax
-    zero%
-    \or one%
-    \or two%
-    \or three%
-    \or four%
-    \or five%
-    \or six%
-    \or seven%
-    \or eight%
-    \or nine%
+    nul%
+    \or unu%
+    \or du%
+    \or tri%
+    \or kvar%
+    \or kvin%
+    \or ses%
+    \or sep%
+    \or ok%
+    \or naŭ%
 \fi
 }%
-\global\let\@@unitstringenglish\@@unitstringenglish
+\global\let\@@unitstringesperanto\@@unitstringesperanto
 %    \end{macrocode}
 % Next the tens, again the argument should be between 0 and 9
 % inclusive.
 %    \begin{macrocode}
-\newcommand*\@@tenstringenglish[1]{%
+\newcommand*\@@tenstringesperanto[1]{%
   \ifcase#1\relax
-    \or ten%
-    \or twenty%
-    \or thirty%
-    \or forty%
-    \or fifty%
-    \or sixty%
-    \or seventy%
-    \or eighty%
-    \or ninety%
+    \or dek%
+    \or dudek%
+    \or tridek%
+    \or kvardek%
+    \or kvindek%
+    \or sesdek%
+    \or sepdek%
+    \or okdek%
+    \or naŭdek%
   \fi
 }%
-\global\let\@@tenstringenglish\@@tenstringenglish
+\global\let\@@tenstringesperanto\@@tenstringesperanto
 %    \end{macrocode}
 % Finally the teens, again the argument should be between 0 and 9
 % inclusive.
 %    \begin{macrocode}
-\newcommand*\@@teenstringenglish[1]{%
+\newcommand*\@@teenstringesperanto[1]{%
   \ifcase#1\relax
-    ten%
-    \or eleven%
-    \or twelve%
-    \or thirteen%
-    \or fourteen%
-    \or fifteen%
-    \or sixteen%
-    \or seventeen%
-    \or eighteen%
-    \or nineteen%
+    dek%
+    \or dek unu%
+    \or dek du%
+    \or dek tri%
+    \or dek kvar%
+    \or dek kvin%
+    \or dek ses%
+    \or dek sep%
+    \or dek ok%
+    \or dek naŭ%
   \fi
 }%
-\global\let\@@teenstringenglish\@@teenstringenglish
+\global\let\@@teenstringesperanto\@@teenstringesperanto
 %    \end{macrocode}
 % As above, but with the initial letter in uppercase. The units:
 %    \begin{macrocode}
-\newcommand*\@@Unitstringenglish[1]{%
+\newcommand*\@@Unitstringesperanto[1]{%
   \ifcase#1\relax
-    Zero%
-    \or One%
-    \or Two%
-    \or Three%
-    \or Four%
-    \or Five%
-    \or Six%
-    \or Seven%
-    \or Eight%
-    \or Nine%
+    Nul%
+    \or Unu%
+    \or Du%
+    \or Tri%
+    \or Kvar%
+    \or Kvin%
+    \or Ses%
+    \or Sep%
+    \or Ok%
+    \or Naŭ%
   \fi
 }%
-\global\let\@@Unitstringenglish\@@Unitstringenglish
+\global\let\@@Unitstringesperanto\@@Unitstringesperanto
 %    \end{macrocode}
 % The tens:
 %    \begin{macrocode}
-\newcommand*\@@Tenstringenglish[1]{%
+\newcommand*\@@Tenstringesperanto[1]{%
   \ifcase#1\relax
-    \or Ten%
-    \or Twenty%
-    \or Thirty%
-    \or Forty%
-    \or Fifty%
-    \or Sixty%
-    \or Seventy%
-    \or Eighty%
-    \or Ninety%
+    \or Dek%
+    \or Dudek%
+    \or Tridek%
+    \or Kvardek%
+    \or Kvindek%
+    \or Sesdek%
+    \or Sepdek%
+    \or Okdek%
+    \or Naŭdek%
   \fi
 }%
-\global\let\@@Tenstringenglish\@@Tenstringenglish
+\global\let\@@Tenstringesperanto\@@Tenstringesperanto
 %    \end{macrocode}
 % The teens:
 %    \begin{macrocode}
-\newcommand*\@@Teenstringenglish[1]{%
+\newcommand*\@@Teenstringesperanto[1]{%
   \ifcase#1\relax
-    Ten%
-    \or Eleven%
-    \or Twelve%
-    \or Thirteen%
-    \or Fourteen%
-    \or Fifteen%
-    \or Sixteen%
-    \or Seventeen%
-    \or Eighteen%
-    \or Nineteen%
+    Dek%
+    \or Dek Unu%
+    \or Dek Du%
+    \or Dek Tri%
+    \or Dek Kvar%
+    \or Dek Kvin%
+    \or Dek Ses%
+    \or Dek Sep%
+    \or Dek Ok%
+    \or Dek Naŭ%
   \fi
 }%
-\global\let\@@Teenstringenglish\@@Teenstringenglish
+\global\let\@@Teenstringesperanto\@@Teenstringesperanto
 %    \end{macrocode}
 % This has changed in version 1.09, so that it now stores
 % the result in the second argument, but doesn't display anything.
@@ -160,7 +160,7 @@
 % documents created with older versions. (These internal macros are
 % not meant for use in documents.)
 %    \begin{macrocode}
-\newcommand*\@@numberstringenglish[2]{%
+\newcommand*\@@numberstringesperanto[2]{%
 \ifnum#1>99999
 \PackageError{fmtcount}{Out of range}%
 {This macro only works for values less than 100000}%
@@ -244,96 +244,96 @@ this number}%
   \fi
 \fi
 }%
-\global\let\@@numberstringenglish\@@numberstringenglish
+\global\let\@@numberstringesperanto\@@numberstringesperanto
 %    \end{macrocode}
 % All lower case version, the second argument must be a control
 % sequence.%
 % \changes{3.02}{2016/01/12}{Replace \cs{DeclareRobustCommand} by
 % \cs{newcommand*} as robustness is handled now at top level in
 % \texttt{fmtcount.sty}, and we don't need \cs{long} macros. Concerned
-% macros are \cs{@numberstringMenglish}, \cs{@ordinalstringMenglish},
-% and \cs{@OrdinalstringMenglish}}
+% macros are \cs{@numberstringMesperanto}, \cs{@ordinalstringMesperanto},
+% and \cs{@OrdinalstringMesperanto}}
 %    \begin{macrocode}
-\newcommand*{\@numberstringMenglish}[2]{%
-  \let\@unitstring=\@@unitstringenglish
-  \let\@teenstring=\@@teenstringenglish
-  \let\@tenstring=\@@tenstringenglish
+\newcommand*{\@numberstringMesperanto}[2]{%
+  \let\@unitstring=\@@unitstringesperanto
+  \let\@teenstring=\@@teenstringesperanto
+  \let\@tenstring=\@@tenstringesperanto
   \def\@hundred{hundred}\def\@thousand{thousand}%
   \def\@andname{and}%
-  \@@numberstringenglish{#1}{#2}%
+  \@@numberstringesperanto{#1}{#2}%
 }%
-\global\let\@numberstringMenglish\@numberstringMenglish
+\global\let\@numberstringMesperanto\@numberstringMesperanto
 %    \end{macrocode}
-% There is no gender in English, so make feminine and neuter the
+% There is no gender in Esperanto, so make feminine and neuter the
 % same
 % as the masculine.
 %    \begin{macrocode}
-\global\let\@numberstringFenglish=\@numberstringMenglish
-\global\let\@numberstringNenglish=\@numberstringMenglish
+\global\let\@numberstringFesperanto=\@numberstringMesperanto
+\global\let\@numberstringNesperanto=\@numberstringMesperanto
 %    \end{macrocode}
 % This version makes the first letter of each word an uppercase
 % character (except ``and''). The second argument must be a control 
 % sequence.
 %    \begin{macrocode}
-\newcommand*\@NumberstringMenglish[2]{%
-  \let\@unitstring=\@@Unitstringenglish
-  \let\@teenstring=\@@Teenstringenglish
-  \let\@tenstring=\@@Tenstringenglish
+\newcommand*\@NumberstringMesperanto[2]{%
+  \let\@unitstring=\@@Unitstringesperanto
+  \let\@teenstring=\@@Teenstringesperanto
+  \let\@tenstring=\@@Tenstringesperanto
   \def\@hundred{Hundred}\def\@thousand{Thousand}%
   \def\@andname{and}%
-  \@@numberstringenglish{#1}{#2}%
+  \@@numberstringesperanto{#1}{#2}%
 }%
-\global\let\@NumberstringMenglish\@NumberstringMenglish
+\global\let\@NumberstringMesperanto\@NumberstringMesperanto
 %    \end{macrocode}
-% There is no gender in English, so make feminine and neuter the
+% There is no gender in Esperanto, so make feminine and neuter the
 % same
 % as the masculine.
 %    \begin{macrocode}
-\global\let\@NumberstringFenglish=\@NumberstringMenglish
-\global\let\@NumberstringNenglish=\@NumberstringMenglish
+\global\let\@NumberstringFesperanto=\@NumberstringMesperanto
+\global\let\@NumberstringNesperanto=\@NumberstringMesperanto
 %    \end{macrocode}
 % Define a macro that produces an ordinal as a string. Again, break
 % it up into units, teens and tens. First the units:
 %    \begin{macrocode}
-\newcommand*\@@unitthstringenglish[1]{%
+\newcommand*\@@unitthstringesperanto[1]{%
   \ifcase#1\relax
-    zeroth%
-    \or first%
-    \or second%
-    \or third%
-    \or fourth%
-    \or fifth%
-    \or sixth%
-    \or seventh%
-    \or eighth%
-    \or ninth%
+    nula%
+    \or unua%
+    \or dua%
+    \or tria%
+    \or kvara%
+    \or kvina%
+    \or sesa%
+    \or sepa%
+    \or oka%
+    \or naŭa%
   \fi
 }%
-\global\let\@@unitthstringenglish\@@unitthstringenglish
+\global\let\@@unitthstringesperanto\@@unitthstringesperanto
 %    \end{macrocode}
 % Next the tens:
 %    \begin{macrocode}
-\newcommand*\@@tenthstringenglish[1]{%
+\newcommand*\@@tenthstringesperanto[1]{%
   \ifcase#1\relax
-    \or tenth%
-    \or twentieth%
-    \or thirtieth%
-    \or fortieth%
-    \or fiftieth%
-    \or sixtieth%
-    \or seventieth%
-    \or eightieth%
-    \or ninetieth%
+    \or deka%
+    \or dudeka%
+    \or trideka%
+    \or kvardeka%
+    \or kvindeka%
+    \or sesdeka%
+    \or sepdeka%
+    \or okdeka%
+    \or naŭdeka%
   \fi
 }%
-\global\let\@@tenthstringenglish\@@tenthstringenglish
+\global\let\@@tenthstringesperanto\@@tenthstringesperanto
 %    \end{macrocode}
 % The teens:
 %    \begin{macrocode}
-\newcommand*\@@teenthstringenglish[1]{%
+\newcommand*\@@teenthstringesperanto[1]{%
   \ifcase#1\relax
-    tenth%
-    \or eleventh%
+    deka%
+    \or dek unua%
     \or twelfth%
     \or thirteenth%
     \or fourteenth%
@@ -344,11 +344,11 @@ this number}%
     \or nineteenth%
   \fi
 }%
-\global\let\@@teenthstringenglish\@@teenthstringenglish
+\global\let\@@teenthstringesperanto\@@teenthstringesperanto
 %    \end{macrocode}
 % As before, but with the first letter in upper case. The units:
 %    \begin{macrocode}
-\newcommand*\@@Unitthstringenglish[1]{%
+\newcommand*\@@Unitthstringesperanto[1]{%
   \ifcase#1\relax
     Zeroth%
     \or First%
@@ -362,11 +362,11 @@ this number}%
     \or Ninth%
   \fi
 }%
-\global\let\@@Unitthstringenglish\@@Unitthstringenglish
+\global\let\@@Unitthstringesperanto\@@Unitthstringesperanto
 %    \end{macrocode}
 % The tens:
 %    \begin{macrocode}
-\newcommand*\@@Tenthstringenglish[1]{%
+\newcommand*\@@Tenthstringesperanto[1]{%
   \ifcase#1\relax
     \or Tenth%
     \or Twentieth%
@@ -379,11 +379,11 @@ this number}%
     \or Ninetieth%
   \fi
 }%
-\global\let\@@Tenthstringenglish\@@Tenthstringenglish
+\global\let\@@Tenthstringesperanto\@@Tenthstringesperanto
 %    \end{macrocode}
 % The teens:
 %    \begin{macrocode}
-\newcommand*\@@Teenthstringenglish[1]{%
+\newcommand*\@@Teenthstringesperanto[1]{%
   \ifcase#1\relax
     Tenth%
     \or Eleventh%
@@ -397,14 +397,14 @@ this number}%
     \or Nineteenth%
   \fi
 }%
-\global\let\@@Teenthstringenglish\@@Teenthstringenglish
+\global\let\@@Teenthstringesperanto\@@Teenthstringesperanto
 %    \end{macrocode}
 % Again, as from version 1.09, this has been changed to take two
 % arguments, where the second argument is a control sequence.
 % The resulting text is stored in the control sequence, and nothing
 % is displayed.
 %    \begin{macrocode}
-\newcommand*\@@ordinalstringenglish[2]{%
+\newcommand*\@@ordinalstringesperanto[2]{%
 \@strctr=#1\relax
 \ifnum#1>99999
 \PackageError{fmtcount}{Out of range}%
@@ -518,52 +518,52 @@ this number}%
   \fi
 \fi
 }%
-\global\let\@@ordinalstringenglish\@@ordinalstringenglish
+\global\let\@@ordinalstringesperanto\@@ordinalstringesperanto
 %    \end{macrocode}
 % All lower case version. Again, the second argument must be a
 % control sequence in which the resulting text is stored.
 %    \begin{macrocode}
-\newcommand*{\@ordinalstringMenglish}[2]{%
-  \let\@unitthstring=\@@unitthstringenglish
-  \let\@teenthstring=\@@teenthstringenglish
-  \let\@tenthstring=\@@tenthstringenglish
-  \let\@unitstring=\@@unitstringenglish
-  \let\@teenstring=\@@teenstringenglish
-  \let\@tenstring=\@@tenstringenglish
+\newcommand*{\@ordinalstringMesperanto}[2]{%
+  \let\@unitthstring=\@@unitthstringesperanto
+  \let\@teenthstring=\@@teenthstringesperanto
+  \let\@tenthstring=\@@tenthstringesperanto
+  \let\@unitstring=\@@unitstringesperanto
+  \let\@teenstring=\@@teenstringesperanto
+  \let\@tenstring=\@@tenstringesperanto
   \def\@andname{and}%
   \def\@hundred{hundred}\def\@thousand{thousand}%
   \def\@hundredth{hundredth}\def\@thousandth{thousandth}%
-  \@@ordinalstringenglish{#1}{#2}%
+  \@@ordinalstringesperanto{#1}{#2}%
 }%
-\global\let\@ordinalstringMenglish\@ordinalstringMenglish
+\global\let\@ordinalstringMesperanto\@ordinalstringMesperanto
 %    \end{macrocode}
-% No gender in English, so make feminine and neuter same as
+% No gender in Esperanto, so make feminine and neuter same as
 % masculine:
 %    \begin{macrocode}
-\global\let\@ordinalstringFenglish=\@ordinalstringMenglish
-\global\let\@ordinalstringNenglish=\@ordinalstringMenglish
+\global\let\@ordinalstringFesperanto=\@ordinalstringMesperanto
+\global\let\@ordinalstringNesperanto=\@ordinalstringMesperanto
 %    \end{macrocode}
 % First letter of each word in upper case:
 %    \begin{macrocode}
-\newcommand*{\@OrdinalstringMenglish}[2]{%
-  \let\@unitthstring=\@@Unitthstringenglish
-  \let\@teenthstring=\@@Teenthstringenglish
-  \let\@tenthstring=\@@Tenthstringenglish
-  \let\@unitstring=\@@Unitstringenglish
-  \let\@teenstring=\@@Teenstringenglish
-  \let\@tenstring=\@@Tenstringenglish
+\newcommand*{\@OrdinalstringMesperanto}[2]{%
+  \let\@unitthstring=\@@Unitthstringesperanto
+  \let\@teenthstring=\@@Teenthstringesperanto
+  \let\@tenthstring=\@@Tenthstringesperanto
+  \let\@unitstring=\@@Unitstringesperanto
+  \let\@teenstring=\@@Teenstringesperanto
+  \let\@tenstring=\@@Tenstringesperanto
   \def\@andname{and}%
   \def\@hundred{Hundred}\def\@thousand{Thousand}%
   \def\@hundredth{Hundredth}\def\@thousandth{Thousandth}%
-  \@@ordinalstringenglish{#1}{#2}%
+  \@@ordinalstringesperanto{#1}{#2}%
 }%
-\global\let\@OrdinalstringMenglish\@OrdinalstringMenglish
+\global\let\@OrdinalstringMesperanto\@OrdinalstringMesperanto
 %    \end{macrocode}
-% No gender in English, so make feminine and neuter same as
+% No gender in Esperanto, so make feminine and neuter same as
 % masculine:
 %    \begin{macrocode}
-\global\let\@OrdinalstringFenglish=\@OrdinalstringMenglish
-\global\let\@OrdinalstringNenglish=\@OrdinalstringMenglish
+\global\let\@OrdinalstringFesperanto=\@OrdinalstringMesperanto
+\global\let\@OrdinalstringNesperanto=\@OrdinalstringMesperanto
 %    \end{macrocode}
 \iffalse Local variables: \fi
 \iffalse mode: docTeX     \fi
