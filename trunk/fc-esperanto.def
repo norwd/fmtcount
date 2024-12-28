@@ -258,8 +258,8 @@ this number}%
   \let\@unitstring=\@@unitstringesperanto
   \let\@teenstring=\@@teenstringesperanto
   \let\@tenstring=\@@tenstringesperanto
-  \def\@hundred{hundred}\def\@thousand{thousand}%
-  \def\@andname{and}%
+  \def\@hundred{cent}\def\@thousand{mil}%
+  \def\@andname{kaj}%
   \@@numberstringesperanto{#1}{#2}%
 }%
 \global\let\@numberstringMesperanto\@numberstringMesperanto
@@ -279,8 +279,8 @@ this number}%
   \let\@unitstring=\@@Unitstringesperanto
   \let\@teenstring=\@@Teenstringesperanto
   \let\@tenstring=\@@Tenstringesperanto
-  \def\@hundred{Hundred}\def\@thousand{Thousand}%
-  \def\@andname{and}%
+  \def\@hundred{Cent}\def\@thousand{Mil}%
+  \def\@andname{kaj}%
   \@@numberstringesperanto{#1}{#2}%
 }%
 \global\let\@NumberstringMesperanto\@NumberstringMesperanto
@@ -334,14 +334,14 @@ this number}%
   \ifcase#1\relax
     deka%
     \or dek unua%
-    \or twelfth%
-    \or thirteenth%
-    \or fourteenth%
-    \or fifteenth%
-    \or sixteenth%
-    \or seventeenth%
-    \or eighteenth%
-    \or nineteenth%
+    \or dek dua%
+    \or dek tria%
+    \or dek kvara%
+    \or dek kvina%
+    \or dek sesa%
+    \or dek sepa%
+    \or dek oka%
+    \or dek naŭa%
   \fi
 }%
 \global\let\@@teenthstringesperanto\@@teenthstringesperanto
@@ -350,16 +350,16 @@ this number}%
 %    \begin{macrocode}
 \newcommand*\@@Unitthstringesperanto[1]{%
   \ifcase#1\relax
-    Zeroth%
-    \or First%
-    \or Second%
-    \or Third%
-    \or Fourth%
-    \or Fifth%
-    \or Sixth%
-    \or Seventh%
-    \or Eighth%
-    \or Ninth%
+    Nula%
+    \or Unua%
+    \or Dua%
+    \or Tria%
+    \or Kvara%
+    \or Kvina%
+    \or Sesa%
+    \or Sepa%
+    \or Oka%
+    \or Naŭa%
   \fi
 }%
 \global\let\@@Unitthstringesperanto\@@Unitthstringesperanto
@@ -368,15 +368,15 @@ this number}%
 %    \begin{macrocode}
 \newcommand*\@@Tenthstringesperanto[1]{%
   \ifcase#1\relax
-    \or Tenth%
-    \or Twentieth%
-    \or Thirtieth%
-    \or Fortieth%
-    \or Fiftieth%
-    \or Sixtieth%
-    \or Seventieth%
-    \or Eightieth%
-    \or Ninetieth%
+    \or Deka%
+    \or Dudeka%
+    \or Trideka%
+    \or Kvardeka%
+    \or Kvindeka%
+    \or Sesdeka%
+    \or Sepdeka%
+    \or Okdeka%
+    \or Naŭdeka%
   \fi
 }%
 \global\let\@@Tenthstringesperanto\@@Tenthstringesperanto
@@ -385,16 +385,16 @@ this number}%
 %    \begin{macrocode}
 \newcommand*\@@Teenthstringesperanto[1]{%
   \ifcase#1\relax
-    Tenth%
-    \or Eleventh%
-    \or Twelfth%
-    \or Thirteenth%
-    \or Fourteenth%
-    \or Fifteenth%
-    \or Sixteenth%
-    \or Seventeenth%
-    \or Eighteenth%
-    \or Nineteenth%
+    Deka%
+    \or Dek Unua%
+    \or Dek Dua%
+    \or Dek Tria%
+    \or Dek Kvara%
+    \or Dek Kvina%
+    \or Dek Sesa%
+    \or Dek Sepa%
+    \or Dek Oka%
+    \or Dek Naŭa%
   \fi
 }%
 \global\let\@@Teenthstringesperanto\@@Teenthstringesperanto
@@ -530,9 +530,9 @@ this number}%
   \let\@unitstring=\@@unitstringesperanto
   \let\@teenstring=\@@teenstringesperanto
   \let\@tenstring=\@@tenstringesperanto
-  \def\@andname{and}%
-  \def\@hundred{hundred}\def\@thousand{thousand}%
-  \def\@hundredth{hundredth}\def\@thousandth{thousandth}%
+  \def\@andname{kaj}%
+  \def\@hundred{cent}\def\@thousand{mil}%
+  \def\@hundredth{centa}\def\@thousandth{mila}%
   \@@ordinalstringesperanto{#1}{#2}%
 }%
 \global\let\@ordinalstringMesperanto\@ordinalstringMesperanto
@@ -552,9 +552,9 @@ this number}%
   \let\@unitstring=\@@Unitstringesperanto
   \let\@teenstring=\@@Teenstringesperanto
   \let\@tenstring=\@@Tenstringesperanto
-  \def\@andname{and}%
-  \def\@hundred{Hundred}\def\@thousand{Thousand}%
-  \def\@hundredth{Hundredth}\def\@thousandth{Thousandth}%
+  \def\@andname{kaj}%
+  \def\@hundred{Cent}\def\@thousand{Mil}%
+  \def\@hundredth{Centa}\def\@thousandth{Mila}%
   \@@ordinalstringesperanto{#1}{#2}%
 }%
 \global\let\@OrdinalstringMesperanto\@OrdinalstringMesperanto
