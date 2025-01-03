@@ -22,7 +22,7 @@ LANG_short:=UKenglish\
 	 italian\
 	 spanish
 
-LANG_shortenc:= english\
+LANG_shortenc:=  english\
 	 esperanto\
 	 french\
 	 german\
