@@ -38,7 +38,7 @@ LANG_shortbab:=esperanto english german portuges
 # Cross referencing tests (for these tests we used global option language loading)
 # The lc+ ucf+ uc+ are needed because on MSWindows filenames are case insenstive
 # lc = lower case, ucf = upper case first, uc = upper case
-LANG_crossref:=french german
+LANG_crossref:=esperanto french german
 CROSSREF:=lc+numberstring ucf+Numberstring uc+NUMBERstring\
 	lc+ordinalstring ucf+Ordinalstring uc+ORDINALstring\
 	lc+ordinal
